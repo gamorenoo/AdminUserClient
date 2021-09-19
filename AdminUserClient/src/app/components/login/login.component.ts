@@ -41,9 +41,11 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const result = this.userService.login( this.form.value.code, this.form.value.password ).toPromise()
+    const result: any = this.userService.login( this.form.value.code, this.form.value.password ).toPromise()
     result.then((response) => {
-      this.user = response as User;
+      console.log(response);
+      this.user = response.user as User;
+      this.user.token = response.token as string;
       if(this.user == null){
         this.viewMsg = true;
       } else {

@@ -13,6 +13,7 @@ export class User {
     password: string;
     role: Role;
     roleName: string;
+    token: string;
 }
 export class Role {
     id: string;
