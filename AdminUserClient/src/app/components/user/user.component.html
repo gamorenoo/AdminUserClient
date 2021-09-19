@@ -1,0 +1,51 @@
+<app-menu></app-menu>
+<div class="content-block animated fadeIn fast">
+    <div class="dx-card responsive-paddings">
+        <br/>
+        <div class="jumbotron">
+            <div>
+                <h1 class="display-3 center">Usuarios registrados</h1>
+            </div>
+        </div>
+        <div class="form-container" style="padding-right: 5px; padding-left: 5px;">
+            <dx-data-grid [dataSource]="listUsers" [allowColumnResizing]="true" [hoverStateEnabled]="true" [showColumnLines]="true" [showRowLines]="true" [showBorders]="true" [columnAutoWidth]="true" [filterRow]="{visible:true}" [columnHidingEnabled]="true" [allowColumnReordering]="true"
+                [rowAlternationEnabled]="true" keyExpr="id">
+                <dxo-sorting mode="multiple"></dxo-sorting>
+
+                <dxi-column dataField="code" caption="Código"></dxi-column>
+                <dxi-column dataField="name" caption="Nombres"></dxi-column>
+                <dxi-column dataField="lastName" caption="Apellidos"></dxi-column>
+                <dxi-column dataField="email" caption="Correo"></dxi-column>
+                <dxi-column dataField="address" caption="Dirección"></dxi-column>
+                <dxi-column dataField="phone" caption="Teléfono"></dxi-column>
+                <dxi-column dataField="age" caption="Edad"></dxi-column>
+                <dxi-column dataField="roleName" caption="Rol"></dxi-column>
+                <dxi-column type="buttons" [width]="110" caption="Acciones" *ngIf="getPermisionEditUsers()">
+                    <dxi-button template="myCommand">
+                        <div *dxTemplate="let data of 'myCommand'">
+                            <dx-button class="btn btn-success btn-sm" icon="fa fa-edit" (onClick)="editUser($event, data)" style="margin-right: 5px;">
+                            </dx-button>
+                            <dx-button class="btn btn-success btn-sm" icon="fa fa-trash" (onClick)="deleteUser($event, data)" *ngIf="getPermisionDeleteUsers()">
+                            </dx-button>
+                            <!-- <button type="button" class="btn btn-success btn-sm" (onClick)="editUser($event, data)" style="margin-right: 5px;"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm" (onClick)="deleteUser($event, data)"><i class="fa fa-trash"></i></button> -->
+                        </div>
+                    </dxi-button>
+                </dxi-column>
+            </dx-data-grid>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <input type="button" class="btn btn-primary" (click)="newUser()" value="Nuevo" *ngIf="getPermisionCreateUsers()" />
+        </div>
+        <div class="col-md-1"></div>
+        <!-- <div class="col-md-2">
+            <input type="button" class="btn btn-primary" value="Nuevo" />
+        </div> -->
+    </div>
+</div>
+
+<app-createusers [showPopup]="showPopupCreateUser" [listUsers]="listUsers" [editionMode]='editionMode' [currentUser]="currentUser" (popupResult)="onResultPopupCreateUser($event)"></app-createusers>

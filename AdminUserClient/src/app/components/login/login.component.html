@@ -1,0 +1,29 @@
+<main class="form-signin">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <br/>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
+
+                <div class="form-floating">
+                    <input type="email" formControlName="code" class="form-control" id="floatingCode">
+                    <label for="floatingInput">Usuario</label>
+                </div>
+                <br/>
+                <div class="form-floating">
+                    <input type="password" formControlName="password" class="form-control" id="floatingPassword">
+                    <label for="floatingPassword">Contraseña</label>
+                </div>
+
+                <div class="checkbox mb-3">
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar</button>
+                <br/>
+                <hr/>
+                <div *ngIf="viewMsg" class="alert alert-danger" role="alert">
+                    {{ msg }}
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
