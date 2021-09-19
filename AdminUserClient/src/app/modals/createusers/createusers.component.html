@@ -1,0 +1,72 @@
+<dx-popup [fullScreen]="false" [title]="titlePopup" *ngIf="showPopup" [(visible)]="showPopup" width="90%" height="60%" [showTitle]="true" [dragEnabled]="false" [closeOnOutsideClick]="false" [toolbarItems]="toolbarItemsPopup" [showCloseButton]="false">
+    <div *dxTemplate="let data of 'content'">
+        <dx-scroll-view [height]="popupContentHeight">
+            <dx-form id="form" #form [formData]="currentUser" [showColonAfterLabel]="false" [colCount]="6" labelLocation="top" [minColWidth]="300">
+
+                <dxi-item editorType="dxTextBox" [colSpan]="2" dataField="code" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                    <dxo-label text="Codigo">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item editorType="dxTextBox" [colSpan]="2" dataField="name" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                    <dxo-label text="Nombres">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item editorType="dxTextBox" [colSpan]="2" dataField="lastName" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                    <dxo-label text="Apellidos">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item editorType="dxTextBox" [colSpan]="2" dataField="address" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                    <dxo-label text="Direccion">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item editorType="dxTextBox" [colSpan]="2" dataField="phone" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                    <dxo-label text="Telefono">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item editorType="dxTextBox" [colSpan]="2" dataField="email" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                    <dxo-label text="Correo electronico">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item editorType="dxNumberBox" [colSpan]="2" dataField="age" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                    <dxo-label text="Edad">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <!-- <dxi-item editorType="dxTextBox" mode="password" [colSpan]="2" dataField="password" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                    <dxo-label text="password">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item> -->
+
+                <dxi-item editorType="simple" [colSpan]="2" dataField="password" #template>
+                    <dxo-label text="password">
+                    </dxo-label>
+                    <dx-text-box mode="password" [(value)]="currentUser.password"></dx-text-box>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item editorType="dxSelectBox" [colSpan]="2" dataField="roleId" [editorOptions]="{ dataSource: listRole, valueExpr: 'id', displayExpr: 'name', showClearButton: 'true' }">
+                    <dxo-label text="Rol">
+                    </dxo-label>
+                    <dxi-validation-rule type="required" message="Campo requerido">
+                    </dxi-validation-rule>
+                </dxi-item>
+            </dx-form>
+        </dx-scroll-view>
+    </div>
+</dx-popup>
