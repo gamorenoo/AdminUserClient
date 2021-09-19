@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, NgModule, OnInit, Output, ViewChild } from '@angular/core';
-import { User } from 'src/app/model/user';
+import { Role, User } from 'src/app/model/user';
 import { DxFormComponent, DxFormModule, DxPopupModule, DxButtonModule, DxTemplateModule, DxScrollViewModule, DxTextBoxModule } from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
+import { RoleService } from 'src/app/services/role.service'
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-createusers',
@@ -12,10 +14,14 @@ export class CreateusersComponent implements OnInit {
   titlePopup = 'Agregar/Editar usuario';
   @ViewChild('form') form: DxFormComponent;
   @Input() showPopup = false;
+  @Input() editionMode: boolean;
+  @Input() listUsers: User[];
+  @Input() currentUser: User;
   @Output() popupResult = new EventEmitter<boolean>(true);
-  currentUser: User = new User();
   listRole: any  = [];
-
+  viewMsg = false;
+  msg = '';
+  ro = false;
   toolbarPopupsCofig = {
     toolbar: 'bottom', location: 'center', widget: 'dxButton', visible: true
   };
@@ -28,8 +34,7 @@ export class CreateusersComponent implements OnInit {
         onClick: () => {
           console.log(this.currentUser)
           if ( this.validateForms() ) {
-            this.showPopup = false;
-            this.popupResult.emit(true);
+            this.saveUser();
           }
         }
       }
@@ -47,14 +52,21 @@ export class CreateusersComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private roleService: RoleService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.viewMsg = false;
     this.getRole();
   }
 
   getRole() {
-
+    const result = this.roleService.getAll().toPromise();
+    result.then((response) => {
+      this.listRole = response as Role[];
+    });
   }
 
   validateForms(): boolean {
@@ -62,7 +74,26 @@ export class CreateusersComponent implements OnInit {
       return false;
     }
 
+    if(this.listUsers.filter(u => u.code === this.currentUser.code).length > 0 && this.editionMode == false){
+      this.msg = 'El usuario: ' + this.currentUser.code + ' ya esta registrado en la base de datos';
+      this.viewMsg = true;
+      return false;
+    }
+    this.viewMsg = true;
     return true;
+  }
+
+  saveUser(){
+    try {
+      const result  = this.userService.save(this.currentUser).toPromise();
+      result.then((response) => {
+        this.showPopup = false;
+        this.popupResult.emit(true);
+      });
+    } catch(err) {
+      this.msg = err;
+      this.viewMsg = true;
+    }
   }
 
   popupContentHeight = () => {

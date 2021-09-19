@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxButtonModule } from 'devextreme-angular';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
@@ -32,6 +32,7 @@ import { CreateusersModule } from 'src/app/modals/createusers/createusers.compon
     HttpClientModule,
     ReactiveFormsModule,
     DxDataGridModule,
+    DxButtonModule,
     CreateusersModule
   ],
   providers: [

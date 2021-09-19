@@ -12,6 +12,7 @@ export class User {
     roleId: string;
     password: string;
     role: Role;
+    roleName: string;
 }
 export class Role {
     id: string;

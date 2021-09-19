@@ -4,10 +4,10 @@
             <a class="nav-link" href="/dashboard">Inicio</a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="/users">Administrar Usuarios</a>
+            <a class="nav-link" href="/users" *ngIf="getPermisionViewUsers()">Administrar Usuarios</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Acerca de...</a>
+            <a class="nav-link" href="javascript();" (click)="salir()">Salir</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>

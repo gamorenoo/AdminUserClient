@@ -3,7 +3,7 @@
         <dx-scroll-view [height]="popupContentHeight">
             <dx-form id="form" #form [formData]="currentUser" [showColonAfterLabel]="false" [colCount]="6" labelLocation="top" [minColWidth]="300">
 
-                <dxi-item editorType="dxTextBox" [colSpan]="2" dataField="code" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
+                <dxi-item editorType="dxTextBox" [colSpan]="2" dataField="code" [editorOptions]="{ showClearButton: 'true', maxLength: 500, readOnly: editionMode }">
                     <dxo-label text="Codigo">
                     </dxo-label>
                     <dxi-validation-rule type="required" message="Campo requerido">
@@ -45,12 +45,6 @@
                     <dxi-validation-rule type="required" message="Campo requerido">
                     </dxi-validation-rule>
                 </dxi-item>
-                <!-- <dxi-item editorType="dxTextBox" mode="password" [colSpan]="2" dataField="password" [editorOptions]="{ showClearButton: 'true', maxLength: 500 }">
-                    <dxo-label text="password">
-                    </dxo-label>
-                    <dxi-validation-rule type="required" message="Campo requerido">
-                    </dxi-validation-rule>
-                </dxi-item> -->
 
                 <dxi-item editorType="simple" [colSpan]="2" dataField="password" #template>
                     <dxo-label text="password">
@@ -67,6 +61,10 @@
                     </dxi-validation-rule>
                 </dxi-item>
             </dx-form>
+            <hr/>
+            <div *ngIf="viewMsg" class="alert alert-danger" role="alert">
+                {{ msg }}
+            </div>
         </dx-scroll-view>
     </div>
 </dx-popup>
